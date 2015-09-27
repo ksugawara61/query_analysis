@@ -22,7 +22,7 @@
 	<body>
 		<div id="submit">
 			<h1>検索クエリ分析ツール</h1>
-			<form method="get" action"#">
+			<form method="get" action="index.html">
 				<p>キーワード
 					<input id="keyword" name="keyword" type="text">
 					を含む検索クエリの数
