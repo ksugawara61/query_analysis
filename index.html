@@ -19,14 +19,63 @@
 		</style>
 	</head>
 	<body>
+		<div class="submit">
+			<h1>検索クエリ分析ツール</h1>
+			キーワード
+			<input id="keyword" name="keyword" type="text">
+			を含む検索クエリの数<br>
+			
+			期間
+			<select name="year">
+				<option value="2014">2014</option>
+				<option value="2015">2015</option>
+			</select>
+			<select name="month">
+				<option value="1">01</option>
+				<option value="2">02</option>
+				<option value="3">03</option>
+				<option value="4">04</option>
+				<option value="5">05</option>
+				<option value="6">06</option>
+				<option value="7">07</option>
+				<option value="8">08</option>
+				<option value="9">09</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>
+			〜
+			<select name="year">
+				<option value="2014">2014</option>
+				<option value="2015">2015</option>
+			</select>
+			<select name="month">
+				<option value="1">01</option>
+				<option value="2">02</option>
+				<option value="3">03</option>
+				<option value="4">04</option>
+				<option value="5">05</option>
+				<option value="6">06</option>
+				<option value="7">07</option>
+				<option value="8">08</option>
+				<option value="9">09</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>
+			<input type="submit" value="送信">
+		</div>
+
 		<script type="text/javascript">
 		// グラフの縦幅と横幅の設定
 		var w = 600;
 		var h = 250;
 		var padding = 20;
 
-		var dataset = [ 5, 10, 10, 20, 100, 100,
-			10000, 20000, 2000, 20, 5, 3 ];
+		var dataset = [
+			5, 10, 10, 20, 100, 100,
+			10000, 20000, 2000, 20, 5, 3
+		];
 
 		var xScale = d3.scale.ordinal()
 			.domain(d3.range(dataset.length))
@@ -91,14 +140,14 @@
 			.call(xAxis);
 
 		// Y軸の作成
-		var yAxis = d3.svg.axis()
-			.scale(yScale)
-			.orient("left")
-			.ticks(5);  // 目盛りの数を設定
-		svg.append("g")
-			.attr("class", "axis")
-			.attr("transform", "translate(" + padding + ",0)")
-			.call(yAxis);
+//		var yAxis = d3.svg.axis()
+//			.scale(yScale)
+//			.orient("left")
+//			.ticks(5);  // 目盛りの数を設定
+//		svg.append("g")
+//			.attr("class", "axis")
+//			.attr("transform", "translate(" + padding + ",0)")
+//			.call(yAxis);
   		</script>
 	</body>
 </html>
