@@ -21,6 +21,8 @@
 	</head>
 	<body>
 		<?php
+		$start = $_GET{'year1'} . "-" . $_GET{'month1'};
+		$end = $_GET{'year2'} . "-" . $_GET{'month2'};
 		$year1 = $_GET{'year1'};
 		$year2 = $_GET{'year2'};
 		$month1 = $_GET{'month1'};
@@ -29,11 +31,13 @@
 		$dataset = array();
 
 		// getの値をもとにデータセットarrayを作成
-		for ($i = $month1; $i <= $month2; $i++) {
+		for ($i = strtotime($start); $i <= strtotime($end); $i = strtotime(date("Y-m", $i) . " +1 month")) {
+//		for ($i = $month1; $i <= $month2; $i++) {
 //			echo $i, PHP_EOL;
 
 			// csvファイルのオープン
-			$name = "./log/" . $year1 . "-" . sprintf("%02d", $i) . ".csv";
+			$name = "./log/" . date("Y-m", $i) . ".csv";
+//			$name = "./log/" . $year1 . "-" . sprintf("%02d", $i) . ".csv";
 			$fp = fopen($name, "r");
 
 			$cnt = 0;
@@ -47,8 +51,7 @@
 			array_push($dataset, $cnt);
 			fclose($fp);
 		}
-		echo json_encode($dataset);
-
+//		echo json_encode($dataset), PHP_EOL;
 		?>
 
 		<div id="submit">
