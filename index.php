@@ -23,35 +23,33 @@
 		<?php
 		$start = $_GET{'year1'} . "-" . $_GET{'month1'};
 		$end = $_GET{'year2'} . "-" . $_GET{'month2'};
-		$year1 = $_GET{'year1'};
-		$year2 = $_GET{'year2'};
-		$month1 = $_GET{'month1'};
-		$month2 = $_GET{'month2'};
+//		$year1 = $_GET{'year1'};
+//		$year2 = $_GET{'year2'};
+//		$month1 = $_GET{'month1'};
+//		$month2 = $_GET{'month2'};
 		$keyword = $_GET{'keyword'};
 		$dataset = array();
 
-		// getの値をもとにデータセットarrayを作成
-		for ($i = strtotime($start); $i <= strtotime($end); $i = strtotime(date("Y-m", $i) . " +1 month")) {
-//		for ($i = $month1; $i <= $month2; $i++) {
-//			echo $i, PHP_EOL;
+		if (!is_null($keyword)){
+			// getの値をもとにデータセットarrayを作成
+			for ($i = strtotime($start); $i <= strtotime($end); $i = strtotime(date("Y-m", $i) . " +1 month")) {
+				//		for ($i = $month1; $i <= $month2; $i++) {
 
-			// csvファイルのオープン
-			$name = "./log/" . date("Y-m", $i) . ".csv";
-//			$name = "./log/" . $year1 . "-" . sprintf("%02d", $i) . ".csv";
-			$fp = fopen($name, "r");
+				// csvファイルのオープン
+				$name = "./log/" . date("Y-m", $i) . ".csv";
+				//			$name = "./log/" . $year1 . "-" . sprintf("%02d", $i) . ".csv";
+				$fp = fopen($name, "r");
 
-			$cnt = 0;
-			while($data = fgetcsv($fp)) {
-//				echo $data[0], $data[1], PHP_EOL;
-				if (strstr($data[0], $keyword) !== FALSE) {
-					$cnt += $data[1];
-//					echo $data[0], $cnt, PHP_EOL;
+				$cnt = 0;
+				while($data = fgetcsv($fp)) {
+					if (strstr($data[0], $keyword) !== FALSE) {
+						$cnt += $data[1];
+					}
 				}
+				array_push($dataset, $cnt);
+				fclose($fp);
 			}
-			array_push($dataset, $cnt);
-			fclose($fp);
 		}
-//		echo json_encode($dataset), PHP_EOL;
 		?>
 
 		<div id="submit">
@@ -103,6 +101,9 @@
 				<input type="submit" value="送信">
 				</p>
 			</form>
+				<p>入力キーワード：<b><?php echo $keyword; ?></b></p>
+				<p>入力期間：<b><?php echo $start; ?>〜<?php echo $end; ?></b></p>
+				<p>検索クエリ数：<?php echo json_encode($dataset); ?></p>
 		</div>
 
 		<script type="text/javascript">
@@ -173,10 +174,12 @@
 		var xAxis = d3.svg.axis()
 			.scale(xScale)
 			.orient("bottom");
+//			.tickFormat(function(d, i) {
+//				return d;
+//			});
 		svg.append("g")
 			.attr("class", "axis")
 			.attr("transform", "translate(0," + (h - padding) + ")")
-//			.attr("transform", "translate(0," + (h - 1) + ")")
 			.call(xAxis);
 
 		// Y軸の作成
