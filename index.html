@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>検索クエリ分析ツール</title>
+		<link rel="stylesheet" href="css/style.css">
 		<script type="text/javascript" src="d3/d3.v3.js"></script>
 		<style type="text/css">
 		.axis path,
@@ -19,51 +20,55 @@
 		</style>
 	</head>
 	<body>
-		<div class="submit">
+		<div id="submit">
 			<h1>検索クエリ分析ツール</h1>
-			キーワード
-			<input id="keyword" name="keyword" type="text">
-			を含む検索クエリの数<br>
-			
-			期間
-			<select name="year">
-				<option value="2014">2014</option>
-				<option value="2015">2015</option>
-			</select>
-			<select name="month">
-				<option value="1">01</option>
-				<option value="2">02</option>
-				<option value="3">03</option>
-				<option value="4">04</option>
-				<option value="5">05</option>
-				<option value="6">06</option>
-				<option value="7">07</option>
-				<option value="8">08</option>
-				<option value="9">09</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			〜
-			<select name="year">
-				<option value="2014">2014</option>
-				<option value="2015">2015</option>
-			</select>
-			<select name="month">
-				<option value="1">01</option>
-				<option value="2">02</option>
-				<option value="3">03</option>
-				<option value="4">04</option>
-				<option value="5">05</option>
-				<option value="6">06</option>
-				<option value="7">07</option>
-				<option value="8">08</option>
-				<option value="9">09</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			<input type="submit" value="送信">
+			<form method="get" action"#">
+				<p>キーワード
+					<input id="keyword" name="keyword" type="text">
+					を含む検索クエリの数
+				</p>
+				
+				<p>期間
+				<select class="select-box" name="year1">
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+				</select>
+				<select class="select-box" name="month1">
+					<option value="1">01</option>
+					<option value="2">02</option>
+					<option value="3">03</option>
+					<option value="4">04</option>
+					<option value="5">05</option>
+					<option value="6">06</option>
+					<option value="7">07</option>
+					<option value="8">08</option>
+					<option value="9">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>
+				〜
+				<select class="select-box" name="year2">
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+				</select>
+				<select class="select-box" name="month2">
+					<option value="1">01</option>
+					<option value="2">02</option>
+					<option value="3">03</option>
+					<option value="4">04</option>
+					<option value="5">05</option>
+					<option value="6">06</option>
+					<option value="7">07</option>
+					<option value="8">08</option>
+					<option value="9">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>
+				<input type="submit" value="送信">
+				</p>
+			</form>
 		</div>
 
 		<script type="text/javascript">
