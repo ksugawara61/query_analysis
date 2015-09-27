@@ -20,11 +20,42 @@
 		</style>
 	</head>
 	<body>
+		<?php
+		$year1 = $_GET{'year1'};
+		$year2 = $_GET{'year2'};
+		$month1 = $_GET{'month1'};
+		$month2 = $_GET{'month2'};
+		$keyword = $_GET{'keyword'};
+		$dataset = array();
+
+		// getの値をもとにデータセットarrayを作成
+		for ($i = $month1; $i <= $month2; $i++) {
+//			echo $i, PHP_EOL;
+
+			// csvファイルのオープン
+			$name = "./log/" . $year1 . "-" . sprintf("%02d", $i) . ".csv";
+			$fp = fopen($name, "r");
+
+			$cnt = 0;
+			while($data = fgetcsv($fp)) {
+//				echo $data[0], $data[1], PHP_EOL;
+				if (strstr($data[0], $keyword) !== FALSE) {
+					$cnt += $data[1];
+//					echo $data[0], $cnt, PHP_EOL;
+				}
+			}
+			array_push($dataset, $cnt);
+			fclose($fp);
+		}
+		echo json_encode($dataset);
+
+		?>
+
 		<div id="submit">
 			<h1>検索クエリ分析ツール</h1>
-			<form method="get" action="index.html">
+			<form method="get" action="index.php">
 				<p>キーワード
-					<input id="keyword" name="keyword" type="text">
+					<input id="keyword" name="keyword" type="text" value="<?php echo $keyword; ?>">
 					を含む検索クエリの数
 				</p>
 				
@@ -77,10 +108,11 @@
 		var h = 250;
 		var padding = 20;
 
-		var dataset = [
+		/*var dataset = [
 			5, 10, 10, 20, 100, 100,
 			10000, 20000, 2000, 20, 5, 3
-		];
+		];*/
+		var dataset = <?php echo json_encode($dataset); ?>;
 
 		var xScale = d3.scale.ordinal()
 			.domain(d3.range(dataset.length))
