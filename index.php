@@ -108,7 +108,7 @@
 
 		<script type="text/javascript">
 		// グラフの縦幅と横幅の設定
-		var w = 600;
+		var w = 800;
 		var h = 250;
 		var padding = 20;
 
