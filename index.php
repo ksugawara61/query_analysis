@@ -21,16 +21,12 @@
 	</head>
 	<body>
 		<?php
-		$start = $_GET{'year1'} . "-" . $_GET{'month1'};
-		$end = $_GET{'year2'} . "-" . $_GET{'month2'};
-//		$year1 = $_GET{'year1'};
-//		$year2 = $_GET{'year2'};
-//		$month1 = $_GET{'month1'};
-//		$month2 = $_GET{'month2'};
-		$keyword = $_GET{'keyword'};
-		$dataset = array();
-
-		if (!is_null($keyword)){
+		if (!empty($_GET{'keyword'})){
+			$start = $_GET{'year1'} . "-" . $_GET{'month1'};
+			$end = $_GET{'year2'} . "-" . $_GET{'month2'};
+			$keyword = $_GET{'keyword'};
+			$dataset = array();
+			
 			// getの値をもとにデータセットarrayを作成
 			for ($i = strtotime($start); $i <= strtotime($end); $i = strtotime(date("Y-m", $i) . " +1 month")) {
 				//		for ($i = $month1; $i <= $month2; $i++) {
@@ -49,6 +45,12 @@
 				array_push($dataset, $cnt);
 				fclose($fp);
 			}
+		}
+		else {
+			$start = "-";
+			$end = "-";
+			$keyword = "";
+			$dataset = array();
 		}
 		?>
 
