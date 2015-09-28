@@ -38,8 +38,15 @@
 
 				$cnt = 0;
 				while($data = fgetcsv($fp)) {
-					if (strstr($data[0], $keyword) !== FALSE) {
-						$cnt += $data[1];
+					if (strcmp($_GET{'match'}, 1) === 0) {
+						if (strcmp($data[0], $keyword) === 0) {
+							$cnt += $data[1];
+						}
+					}
+					else{
+						if (strstr($data[0], $keyword) !== FALSE) {
+							$cnt += $data[1];
+						}
 					}
 				}
 				array_push($dataset, $cnt);
@@ -59,7 +66,11 @@
 			<form method="get" action="index.php">
 				<p>キーワード
 					<input id="keyword" name="keyword" type="text" value="<?php echo $keyword; ?>">
-					を含む検索クエリの数
+					<select class="select-box" name="match">
+						<option value="1">と一致</option>
+						<option value="2">を内包</option>
+					</select>
+					する検索クエリの数
 				</p>
 				
 				<p>期間
@@ -111,7 +122,7 @@
 		<script type="text/javascript">
 		// グラフの縦幅と横幅の設定
 		var w = 800;
-		var h = 250;
+		var h = 400;
 		var padding = 20;
 
 		/*var dataset = [
